@@ -16,33 +16,21 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.internal.importer;
 
-import java.util.Collection;
+import org.eclipse.core.runtime.CoreException;
 
-import com.github.librecut.api.cutter.model.ICutter;
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+import com.github.librecut.api.design.spi.IDesignImporter;
 
-public interface ICutterProvider {
+public interface IDesignImporterDescriptor {
 
-	// TODO add comments
+	String getId();
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
+	String getName();
 
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
+	String getVendor();
 
-	void addStatusListener(ICutterStatusListener listener);
+	String[] getExtensions();
 
-	void removeStatusListener(ICutterStatusListener listener);
-
-	@Deprecated
-	Collection<ICutter> getCutters();
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	IDesignImporter create() throws CoreException;
 }

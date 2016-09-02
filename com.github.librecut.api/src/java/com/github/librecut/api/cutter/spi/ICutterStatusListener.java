@@ -18,31 +18,15 @@
  */
 package com.github.librecut.api.cutter.spi;
 
-import java.util.Collection;
-
 import com.github.librecut.api.cutter.model.ICutter;
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
 
-public interface ICutterProvider {
+public interface ICutterStatusListener {
 
-	// TODO add comments
+	// TODO add documentation
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
+	void handleNewCutter(ICutter cutter);
 
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
+	void handleLostCutter(String cutterId);
 
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	@Deprecated
-	Collection<ICutter> getCutters();
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	void handleStatusChange(ICutter cutter);
 }

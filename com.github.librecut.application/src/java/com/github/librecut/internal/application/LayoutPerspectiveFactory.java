@@ -16,42 +16,16 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.model;
+package com.github.librecut.internal.application;
 
-public class MediaSize implements IMediaSize {
+import org.eclipse.ui.IPageLayout;
+import org.eclipse.ui.IPerspectiveFactory;
 
-	private final String name;
-	private final double width;
-	private final double height;
-
-	/**
-	 * 
-	 * @param name
-	 *            the media name
-	 * @param width
-	 *            the media width in inches
-	 * @param height
-	 *            the media height in inches
-	 */
-	public MediaSize(String name, double width, double height) {
-
-		this.name = name;
-		this.width = width;
-		this.height = height;
-	}
+public class LayoutPerspectiveFactory implements IPerspectiveFactory {
 
 	@Override
-	public String getName() {
-		return name;
-	}
+	public void createInitialLayout(IPageLayout layout) {
 
-	@Override
-	public double getWidth() {
-		return width;
-	}
-
-	@Override
-	public double getHeight() {
-		return height;
+		layout.setFixed(false);
 	}
 }

@@ -33,6 +33,9 @@ public interface ICutter {
 
 	ICutterDescriptor getDescriptor();
 
+	DeviceState getDeviceState();
+
+	@Deprecated
 	DeviceState getDeviceState(IProgressMonitor monitor) throws InterruptedException;
 
 	IStatus reset(IProgressMonitor monitor);

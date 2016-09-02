@@ -16,33 +16,11 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.api.cutter.model;
 
-import java.util.Collection;
+public enum LoadingDirection {
 
-import com.github.librecut.api.cutter.model.ICutter;
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+	// TODO add documentation
 
-public interface ICutterProvider {
-
-	// TODO add comments
-
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
-
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
-
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	@Deprecated
-	Collection<ICutter> getCutters();
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	Top, Bottom, Left, Right
 }

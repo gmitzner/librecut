@@ -16,28 +16,44 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.design.model;
+package com.github.librecut.common.cutter.model;
 
-/**
- * An instance of this interface represents a handle to a design.
- */
-public interface IDesign {
+import com.github.librecut.api.media.model.IMediaSize;
+
+public class MediaSize implements IMediaSize {
+
+	private final String name;
+	private final double width;
+	private final double height;
 
 	/**
-	 * Creates a pattern based on this design and the supplied rendering
-	 * parameters.
 	 * 
-	 * @param rotationAngle
-	 *            the rotation angle of the design in radian.
-	 * @param scaling
-	 *            the scale of the design.
-	 * @param mirrorPattern
-	 *            flag indicating if the design must be mirrored.
-	 * @param dpiX
-	 *            the DPI for X coordinate.
-	 * @param dpiY
-	 *            the DPI for Y coordinate.
-	 * @return the pattern based on this design.
+	 * @param name
+	 *            the media name
+	 * @param width
+	 *            the media width in inches
+	 * @param height
+	 *            the media height in inches
 	 */
-	IPattern createPattern(double rotationAngle, double scaling, boolean mirrorPattern, double dpiX, double dpiY);
+	public MediaSize(String name, double width, double height) {
+
+		this.name = name;
+		this.width = width;
+		this.height = height;
+	}
+
+	@Override
+	public String getName() {
+		return name;
+	}
+
+	@Override
+	public double getWidth() {
+		return width;
+	}
+
+	@Override
+	public double getHeight() {
+		return height;
+	}
 }

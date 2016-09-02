@@ -16,25 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.model;
+package com.github.librecut.common.cutter.model;
 
-public interface IMediaSize {
+import com.github.librecut.api.media.model.IMediaSize;
 
-	// TODO add comments
+public final class DefaultMediaSize {
 
-	String getName();
+	public static final IMediaSize A3_Landscape = new MediaSize("A3 Landscape", 16.5354330709d, 11.6929133858d);
+	public static final IMediaSize A3_Portrait = new MediaSize("A3 Portrait", 11.6929133858d, 16.5354330709d);
+	public static final IMediaSize A4_Landscape = new MediaSize("A4 Landscape", 11.6929133858d, 8.2677165354d);
+	public static final IMediaSize A4_Portrait = new MediaSize("A4 Portrait", 8.2677165354d, 11.6929133858d);
 
-	/**
-	 * Returns the media width in inches.
-	 * 
-	 * @return the media width in inches
-	 */
-	double getWidth();
-
-	/**
-	 * Returns the media height in inches.
-	 * 
-	 * @return the media height in inches
-	 */
-	double getHeight();
+	private DefaultMediaSize() {
+		super();
+	}
 }

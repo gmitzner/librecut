@@ -16,26 +16,25 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.design.model;
+package com.github.librecut.internal.resource.model;
 
-public class Point implements IPoint {
+import java.util.List;
 
-	private final double x;
-	private final double y;
+import com.github.librecut.api.media.model.IMedia;
 
-	public Point(double x, double y) {
+public interface ILayout {
 
-		this.x = x;
-		this.y = y;
-	}
+	String getName();
 
-	@Override
-	public double getX() {
-		return x;
-	}
+	void setName(String name);
 
-	@Override
-	public double getY() {
-		return y;
-	}
+	IMedia getMedia();
+
+	void setMedia(IMedia media);
+
+	List<IDesignEntity> getDesignEntityList();
+
+	boolean isMirrored();
+
+	void setMirrored(boolean enable);
 }

@@ -9,8 +9,10 @@
 
 	<modules>
 		<module>com.github.librecut.api</module>
-<!--		<module>com.github.librecut.application</module>
-		<module>com.github.librecut.mediascanner</module>
+		<module>com.github.librecut.api.gui</module>
+		<module>com.github.librecut.common</module>
+		<module>com.github.librecut.application</module>
+<!--		<module>com.github.librecut.mediascanner</module>
 		<module>com.github.librecut.svg</module>
 		<module>com.github.librecut.cutter.silhouette</module>
 		<module>com.github.librecut.opencv</module>

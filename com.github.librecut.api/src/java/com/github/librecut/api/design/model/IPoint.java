@@ -18,11 +18,23 @@
  */
 package com.github.librecut.api.design.model;
 
+/**
+ * An instance of this interface provides X and Y coordinates of a point
+ * measured in inches.
+ */
 public interface IPoint {
 
-	// TODO add comments
-
+	/**
+	 * Returns the X coordinate in inches.
+	 * 
+	 * @return the X coordinate in inches.
+	 */
 	double getX();
 
+	/**
+	 * Returns the Y coordinate in inches.
+	 * 
+	 * @return the Y coordinate in inches.
+	 */
 	double getY();
 }

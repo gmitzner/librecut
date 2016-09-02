@@ -18,15 +18,37 @@
  */
 package com.github.librecut.api.cutter.model;
 
+/**
+ * An instance of this interface provides information about borders of rectangle
+ * areas. The unit of all returned values is inch.
+ */
 public interface IBorders {
 
-	// TODO add comments
-
+	/**
+	 * Returns the distance to the top border in inches.
+	 * 
+	 * @return the distance in inches.
+	 */
 	double getTopBorder();
 
+	/**
+	 * Returns the distance to the bottom border in inches.
+	 * 
+	 * @return the distance in inches.
+	 */
 	double getBottomBorder();
 
+	/**
+	 * Returns the distance to the left border in inches.
+	 * 
+	 * @return the distance in inches.
+	 */
 	double getLeftBorder();
 
+	/**
+	 * Returns the distance to the right border in inches.
+	 * 
+	 * @return the distance in inches.
+	 */
 	double getRightBorder();
 }

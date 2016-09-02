@@ -16,33 +16,28 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.common.design.model;
 
-import java.util.Collection;
+import com.github.librecut.api.design.model.IPoint;
 
-import com.github.librecut.api.cutter.model.ICutter;
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+public class Point implements IPoint {
 
-public interface ICutterProvider {
+	private final double x;
+	private final double y;
 
-	// TODO add comments
+	public Point(double x, double y) {
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
+		this.x = x;
+		this.y = y;
+	}
 
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
+	@Override
+	public double getX() {
+		return x;
+	}
 
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	@Deprecated
-	Collection<ICutter> getCutters();
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	@Override
+	public double getY() {
+		return y;
+	}
 }

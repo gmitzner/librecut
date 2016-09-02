@@ -16,33 +16,15 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.api.media.model;
 
-import java.util.Collection;
+import com.github.librecut.api.cutter.model.IBorders;
 
-import com.github.librecut.api.cutter.model.ICutter;
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
-
-public interface ICutterProvider {
+public interface IMedia {
 
 	// TODO add comments
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
+	IMediaSize getMediaSize();
 
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
-
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	@Deprecated
-	Collection<ICutter> getCutters();
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	IBorders getBorders();
 }

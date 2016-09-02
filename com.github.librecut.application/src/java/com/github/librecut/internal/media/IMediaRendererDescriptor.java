@@ -16,13 +16,19 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.model;
+package com.github.librecut.internal.media;
 
-public interface IMediaFormat {
+import org.eclipse.core.runtime.CoreException;
 
-	// TODO add comments
+import com.github.librecut.api.gui.spi.IMediaRenderer;
 
-	IMediaSize getMediaSize();
+public interface IMediaRendererDescriptor {
 
-	IBorders getBorders();
+	String getId();
+
+	String getName();
+
+	String getVendor();
+
+	IMediaRenderer createMediaRenderer() throws CoreException;
 }

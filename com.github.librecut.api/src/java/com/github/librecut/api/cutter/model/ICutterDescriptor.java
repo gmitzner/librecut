@@ -20,6 +20,9 @@ package com.github.librecut.api.cutter.model;
 
 import java.util.Collection;
 
+import com.github.librecut.api.media.model.IMedia;
+import com.github.librecut.api.media.model.IMediaSize;
+
 public interface ICutterDescriptor {
 
 	// TODO add comments
@@ -28,19 +31,15 @@ public interface ICutterDescriptor {
 
 	String getDescription();
 
-	Collection<IMediaFormat> getDefaultMediaFormats();
+	Collection<IMedia> getDefaultMediaFormats();
 
 	IBorders getBorders(IMediaSize mediaSize);
 
-	Direction getLoadingDirection();
+	LoadingDirection getLoadingDirection();
 
 	double getDpiX();
 
 	double getDpiY();
 
 	Collection<IParameterDescriptor<?>> getCuttingParameters();
-
-	enum Direction {
-		Top, Bottom, Left, Right
-	}
 }

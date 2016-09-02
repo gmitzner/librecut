@@ -16,16 +16,24 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.model;
+package com.github.librecut.internal.application.commands;
 
-public final class DefaultMediaSize {
+import org.eclipse.core.commands.AbstractHandler;
+import org.eclipse.core.commands.ExecutionEvent;
+import org.eclipse.core.commands.ExecutionException;
+import org.eclipse.jface.wizard.WizardDialog;
+import org.eclipse.ui.handlers.HandlerUtil;
 
-	public static final IMediaSize A3_Landscape = new MediaSize("A3 Landscape", 16.5354330709d, 11.6929133858d);
-	public static final IMediaSize A3_Portrait = new MediaSize("A3 Portrait", 11.6929133858d, 16.5354330709d);
-	public static final IMediaSize A4_Landscape = new MediaSize("A4 Landscape", 11.6929133858d, 8.2677165354d);
-	public static final IMediaSize A4_Portrait = new MediaSize("A4 Portrait", 8.2677165354d, 11.6929133858d);
+import com.github.librecut.internal.cutter.wizards.CutWizard;
 
-	private DefaultMediaSize() {
-		super();
+public class OpenCutWizardHandler extends AbstractHandler {
+
+	@Override
+	public Object execute(ExecutionEvent event) throws ExecutionException {
+
+		WizardDialog wizardDialog = new WizardDialog(HandlerUtil.getActiveWorkbenchWindow(event).getShell(),
+				new CutWizard());
+		wizardDialog.open();
+		return null;
 	}
 }

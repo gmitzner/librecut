@@ -10,4 +10,5 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.12.0",
 Export-Package: com.github.librecut.api.cutter.model;version="1.0.0",
  com.github.librecut.api.cutter.spi;version="1.0.0",
  com.github.librecut.api.design.model;version="1.0.0",
- com.github.librecut.api.design.spi;version="1.0.0"
+ com.github.librecut.api.design.spi;version="1.0.0",
+ com.github.librecut.api.media.model;version="1.0.0"

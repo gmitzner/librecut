@@ -16,7 +16,9 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.model;
+package com.github.librecut.common.cutter.model;
+
+import com.github.librecut.api.cutter.model.IBorders;
 
 public class Borders implements IBorders {
 

@@ -16,33 +16,18 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.internal.layouteditor;
 
-import java.util.Collection;
+import com.github.librecut.api.design.model.IPoint;
+import com.github.librecut.internal.resource.model.IDesignEntity;
 
-import com.github.librecut.api.cutter.model.ICutter;
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+public interface IDesignEntityChangeListener {
 
-public interface ICutterProvider {
+	void changePosition(IDesignEntity entity, IPoint position);
 
-	// TODO add comments
+	void changeRotationAngle(IDesignEntity entity, double angle);
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
+	void changeScale(IDesignEntity entity, double scale);
 
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
-
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	@Deprecated
-	Collection<ICutter> getCutters();
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	void removeEntity(IDesignEntity entity);
 }
