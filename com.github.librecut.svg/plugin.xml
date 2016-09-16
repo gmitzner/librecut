@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.github.librecut.api.designImporters">
+      <importer
+            class="com.github.librecut.internal.svg.importer.SvgImporter"
+            id="com.github.librecut.svg.importer"
+            name="SVG Design Importer"
+            vendor="Gerhard Mitzner">
+         <fileExtension
+               extension="svg">
+         </fileExtension>
+      </importer>
+   </extension>
+
+</plugin>

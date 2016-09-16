@@ -12,8 +12,8 @@
 		<module>com.github.librecut.api.gui</module>
 		<module>com.github.librecut.common</module>
 		<module>com.github.librecut.application</module>
+                <module>com.github.librecut.svg</module>
 <!--		<module>com.github.librecut.mediascanner</module>
-		<module>com.github.librecut.svg</module>
 		<module>com.github.librecut.cutter.silhouette</module>
 		<module>com.github.librecut.opencv</module>
 		<module>com.github.librecut.opencv.linux.x86</module>
@@ -31,6 +31,11 @@
 		<repository>
 			<id>eclipse-neon</id>
 			<url>http://download.eclipse.org/releases/neon</url>
+			<layout>p2</layout>
+		</repository>
+		<repository>
+			<id>orbit-neon</id>
+			<url>http://download.eclipse.org/tools/orbit/downloads/drops/R20160520211859/repository</url>
 			<layout>p2</layout>
 		</repository>
 	</repositories>
