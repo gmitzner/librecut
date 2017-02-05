@@ -1,0 +1,11 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: LibreCut Common USB Base Library x86_64 Binaries
+Bundle-SymbolicName: com.github.librecut.common.usb.x86_64;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Gerhard Mitzner
+Fragment-Host: com.github.librecut.common.usb;bundle-version="[1.0.0,2.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Eclipse-PlatformFilter: (& (osgi.os=linux) (osgi.arch=x86_64))
+Bundle-ClassPath: lib/libusb4java-1.2.0-linux-x86_64.jar,
+ .

@@ -16,29 +16,14 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
 
-import java.util.Collection;
+package com.github.librecut.internal.cutter.silhouette;
 
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+import org.eclipse.core.runtime.IProgressMonitor;
 
-public interface ICutterProvider {
+import com.github.librecut.api.cutter.model.ICutter;
 
-	// TODO add comments
+public interface IStatefulCutter extends ICutter {
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
-
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
-
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	void updateDeviceState(IProgressMonitor monitor) throws InterruptedException;
 }

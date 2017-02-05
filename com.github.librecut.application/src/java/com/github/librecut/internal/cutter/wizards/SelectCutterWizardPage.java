@@ -156,7 +156,7 @@ public class SelectCutterWizardPage extends WizardPage {
 
 				try {
 					for (ICutter cutter : cutters) {
-						DeviceState state = cutter.getDeviceState(monitor);
+						DeviceState state = cutter.getDeviceState();
 						stateMap.put(cutter, state);
 					}
 					Display.getDefault().asyncExec(new Runnable() {
@@ -167,8 +167,6 @@ public class SelectCutterWizardPage extends WizardPage {
 						}
 					});
 					return Status.OK_STATUS;
-				} catch (InterruptedException e) {
-					return Status.CANCEL_STATUS;
 				} finally {
 					schedule(CUTTER_UPDATE_SLEEPING_TIME_MILLIS);
 				}

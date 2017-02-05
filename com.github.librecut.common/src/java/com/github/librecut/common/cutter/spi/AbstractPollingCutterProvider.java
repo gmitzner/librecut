@@ -155,14 +155,6 @@ public abstract class AbstractPollingCutterProvider implements ICutterProvider {
 		listenerList.remove(listener);
 	}
 
-	@Deprecated
-	@Override
-	public Collection<ICutter> getCutters() {
-
-		Collection<ICutter> cutters = cuttersRef.get();
-		return Collections.unmodifiableCollection(cutters);
-	}
-
 	private void notifyNewCutter(final ICutter cutter, ICutterStatusListener listener) {
 
 		SafeRunner.run(new ISafeRunnable() {

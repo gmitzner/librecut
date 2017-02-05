@@ -26,6 +26,8 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jface.operation.IRunnableWithProgress;
 import org.eclipse.jface.wizard.Wizard;
@@ -33,6 +35,7 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.statushandlers.StatusManager;
 
 import com.github.librecut.api.cutter.model.ICutter;
 import com.github.librecut.api.cutter.model.ICutterDescriptor;
@@ -43,10 +46,13 @@ import com.github.librecut.api.design.model.IPolyline;
 import com.github.librecut.api.media.model.IMedia;
 import com.github.librecut.api.media.model.IMediaSize;
 import com.github.librecut.common.design.model.Point;
+import com.github.librecut.internal.application.Activator;
 import com.github.librecut.internal.resource.model.IDesignEntity;
 import com.github.librecut.internal.resource.model.ILayout;
 
 public class CutWizard extends Wizard {
+
+	private static final int STATUS_CODE_PATTERN_VALIDATION_FAILED = -1;
 
 	private SelectCutterWizardPage selectCutterPage;
 	private CuttingParameterWizardPage cuttingParameterPage;
@@ -83,7 +89,11 @@ public class CutWizard extends Wizard {
 		final IPattern pattern = createPattern(layout, cutter.getDescriptor());
 
 		if (!validatePattern(pattern, layout, cutter.getDescriptor())) {
-			// TODO error message
+			// TODO improve error reporting (show details of validation error)
+			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID, STATUS_CODE_PATTERN_VALIDATION_FAILED,
+					Messages.CutWizard_PatternValidationError,
+					null);
+			StatusManager.getManager().handle(status, StatusManager.LOG | StatusManager.BLOCK);
 			return false;
 		}
 

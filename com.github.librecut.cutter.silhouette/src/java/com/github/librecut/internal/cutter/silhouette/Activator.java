@@ -16,29 +16,43 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.internal.cutter.silhouette;
 
-import java.util.Collection;
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
 
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+import com.github.librecut.common.usb.Usb;
 
-public interface ICutterProvider {
+public class Activator implements BundleActivator {
 
-	// TODO add comments
+	public static final String PLUGIN_ID = "com.github.librecut.cutter.silhouette";
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
+	private static Activator current;
 
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
+	private Usb usb;
 
-	void addStatusListener(ICutterStatusListener listener);
+	@Override
+	public void start(BundleContext bundleContext) throws Exception {
 
-	void removeStatusListener(ICutterStatusListener listener);
+		usb = Usb.create();
 
-	Collection<ICutterDescriptor> getSupportedCutters();
+		current = this;
+	}
+
+	@Override
+	public void stop(BundleContext bundleContext) throws Exception {
+
+		current = null;
+
+		Usb.destroy(usb);
+		usb = null;
+	}
+
+	public static Activator getDefault() {
+		return current;
+	}
+
+	public Usb getUsb() {
+		return usb;
+	}
 }

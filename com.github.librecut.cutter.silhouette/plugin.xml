@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.github.librecut.api.cutterProviders">
+      <provider
+            class="com.github.librecut.internal.cutter.silhouette.CutterProvider"
+            id="com.github.librecut.cutter.silhouette.provider"
+            name="Cutter provider for Silhouette cutters"
+            vendor="Gerhard Mitzner">
+      </provider>
+   </extension>
+
+</plugin>

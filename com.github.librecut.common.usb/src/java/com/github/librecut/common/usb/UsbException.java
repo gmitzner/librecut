@@ -16,29 +16,20 @@
  * You should have received a copy of the GNU Lesser General Public License
  * along with LibreCut. If not, see <http://www.gnu.org/licenses/>.
  */
-package com.github.librecut.api.cutter.spi;
+package com.github.librecut.common.usb;
 
-import java.util.Collection;
+public class UsbException extends Exception {
+	private static final long serialVersionUID = 6335076038689456866L;
 
-import com.github.librecut.api.cutter.model.ICutterDescriptor;
+	private final int errorCode;
 
-public interface ICutterProvider {
+	public UsbException(String message, int errorCode) {
 
-	// TODO add comments
+		super(message);
+		this.errorCode = errorCode;
+	}
 
-	/**
-	 * Must not be long-running!
-	 */
-	void startup();
-
-	/**
-	 * Must not block!
-	 */
-	void shutdown();
-
-	void addStatusListener(ICutterStatusListener listener);
-
-	void removeStatusListener(ICutterStatusListener listener);
-
-	Collection<ICutterDescriptor> getSupportedCutters();
+	public int getErrorCode() {
+		return errorCode;
+	}
 }

@@ -35,12 +35,10 @@ public interface ICutter {
 
 	DeviceState getDeviceState();
 
-	@Deprecated
-	DeviceState getDeviceState(IProgressMonitor monitor) throws InterruptedException;
+	IStatus reset(IProgressMonitor monitor) throws InterruptedException;
 
-	IStatus reset(IProgressMonitor monitor);
-
-	IStatus cut(IPattern pattern, Map<String, Object> parameterMap, IProgressMonitor monitor);
+	IStatus cut(IPattern pattern, Map<String, Object> parameterMap, IProgressMonitor monitor)
+			throws InterruptedException;
 
 	enum DeviceState {
 		Ready, Busy, WaitingForMedia, Error, Initializing, Off
