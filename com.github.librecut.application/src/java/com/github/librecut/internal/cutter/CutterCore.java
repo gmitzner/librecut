@@ -170,6 +170,9 @@ public final class CutterCore implements ICutterStatusListener {
 	public synchronized void handleNewCutter(ICutter cutter) {
 
 		Collection<ICutter> oldCutters = cuttersRef.get();
+		if (oldCutters == null) {
+			oldCutters = Collections.emptyList();
+		}
 		List<ICutter> newCutterList = new ArrayList<>(oldCutters);
 		newCutterList.add(cutter);
 		Collections.sort(newCutterList, new Comparator<ICutter>() {

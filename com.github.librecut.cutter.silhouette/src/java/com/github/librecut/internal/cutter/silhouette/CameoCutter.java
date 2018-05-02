@@ -67,6 +67,8 @@ public class CameoCutter implements IStatefulCutter {
 	private static final String SET_UPPER_RIGHT = "Z%d,%d";
 	private static final String SET_LINE_TYPE = "L%d";
 
+	private static final int MINIMUM_COMMAND_LENGTH = 100;
+
 	private static final int GET_STATUS_TIMEOUT_MILLIS = 10000;
 	private static final int RESET_TIMEOUT_MILLIS = 10000;
 	private static final int WRITE_COMMAND_TIMEOUT_MILLIS = 1000;
@@ -235,6 +237,12 @@ public class CameoCutter implements IStatefulCutter {
 					return handleDeviceNotReady(deviceState);
 				}
 
+				sendCuttingInitializationSequence(device, monitor);
+				deviceState = waitWhileBusy(device, monitor);
+				if (deviceState != DeviceState.Ready) {
+					return handleDeviceNotReady(deviceState);
+				}
+
 				sendCuttingData(device, pattern, monitor);
 				deviceState = waitWhileBusy(device, monitor);
 				if (deviceState != DeviceState.Ready) {
@@ -310,52 +318,33 @@ public class CameoCutter implements IStatefulCutter {
 		return true;
 	}
 
-	private void sendCuttingData(UsbDeviceHandle device, IPattern pattern, IProgressMonitor monitor)
+	private void sendCuttingInitializationSequence(UsbDeviceHandle device, IProgressMonitor monitor)
 			throws UsbException, InterruptedException {
 
 		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+
 		appendCommand(buffer, START_CUTTING_0);
 		// appendCommand(buffer, String.format(SET_LOWER_LEFT, 30, 30));
 		appendCommand(buffer, START_CUTTING_1);
 		appendCommand(buffer, START_CUTTING_2);
 		appendCommand(buffer, String.format(SET_LINE_TYPE, 0));
 		finishCommand(buffer);
-		device.bulkWrite(ENDPOINT_ID_COMMAND, buffer.toByteArray(), WRITE_COMMAND_TIMEOUT_MILLIS);
 
+		device.bulkWrite(ENDPOINT_ID_COMMAND, buffer.toByteArray(), WRITE_COMMAND_TIMEOUT_MILLIS);
+	}
+
+	private void sendCuttingData(UsbDeviceHandle device, IPattern pattern, IProgressMonitor monitor)
+			throws UsbException, InterruptedException {
+
+		ByteArrayOutputStream buffer = new ByteArrayOutputStream();
 		int commandCounter = 0;
-		buffer = new ByteArrayOutputStream();
 		Collection<IPolyline> polylines = pattern.getPolylines(true);
 		SubMonitor subMonitor = SubMonitor.convert(monitor, polylines.size());
 		try {
 			for (IPolyline polyline : polylines) {
-				Iterator<IPoint> iterator = polyline.iterator();
+				commandCounter += writePolylineCuttingData(polyline, buffer);
 
-				IPoint point = iterator.next();
-				int x = getX(point);
-				int y = getY(point);
-				String command = String.format("M%d.00,%d.00", x, y);
-				System.out.println(command);
-				appendCommand(buffer, command);
-				++commandCounter;
-				int lastX = x;
-				int lastY = y;
-
-				while (iterator.hasNext()) {
-					point = iterator.next();
-					x = getX(point);
-					y = getY(point);
-					if ((x != lastX) || (y != lastY)) {
-						command = String.format("D%d.00,%d.00", x, y);
-						System.out.println(command);
-						appendCommand(buffer, command);
-						++commandCounter;
-						lastX = x;
-						lastY = y;
-					}
-				}
-				finishCommand(buffer);
-
-				if (commandCounter > 100) {
+				if (commandCounter >= MINIMUM_COMMAND_LENGTH) {
 					device.bulkWrite(ENDPOINT_ID_COMMAND, buffer.toByteArray(),
 							WRITE_COMMAND_TIMEOUT_MILLIS * commandCounter);
 					waitWhileBusy(device, subMonitor);
@@ -365,9 +354,46 @@ public class CameoCutter implements IStatefulCutter {
 
 				subMonitor.worked(1);
 			}
+
+			if (buffer.size() > 0) {
+				device.bulkWrite(ENDPOINT_ID_COMMAND, buffer.toByteArray(),
+						WRITE_COMMAND_TIMEOUT_MILLIS * commandCounter);
+				waitWhileBusy(device, subMonitor);
+			}
 		} finally {
 			monitor.done();
 		}
+	}
+
+	private int writePolylineCuttingData(IPolyline polyline, ByteArrayOutputStream buffer) {
+
+		Iterator<IPoint> iterator = polyline.iterator();
+
+		IPoint point = iterator.next();
+		int x = getX(point);
+		int y = getY(point);
+		String command = String.format("M%d.00,%d.00", x, y);
+		appendCommand(buffer, command);
+
+		int commandCounter = 1;
+		int lastX = x;
+		int lastY = y;
+
+		while (iterator.hasNext()) {
+			point = iterator.next();
+			x = getX(point);
+			y = getY(point);
+			if ((x != lastX) || (y != lastY)) {
+				command = String.format("D%d.00,%d.00", x, y);
+				appendCommand(buffer, command);
+				++commandCounter;
+				lastX = x;
+				lastY = y;
+			}
+		}
+		finishCommand(buffer);
+
+		return commandCounter;
 	}
 
 	private int getX(IPoint point) {
