@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: LibreCut Common OpenCV Base Library
+Bundle-SymbolicName: com.github.librecut.common.opencv;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: Gerhard Mitzner
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.12.0,4.0.0)"
+Bundle-ClassPath: lib/opencv-341.jar,
+ .
+Bundle-Activator: com.github.librecut.internal.common.opencv.Activator
+Export-Package: org.opencv.core;version="3.4.1",
+ org.opencv.imgproc;version="3.4.1"

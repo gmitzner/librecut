@@ -14,13 +14,12 @@
 		<module>com.github.librecut.common.usb</module>
 		<module>com.github.librecut.common.usb.linux.x86</module>
 		<module>com.github.librecut.common.usb.linux.x86_64</module>
+		<module>com.github.librecut.common.opencv</module>
+		<module>com.github.librecut.common.opencv.linux.x86_64</module>
 		<module>com.github.librecut.cutter.silhouette</module>
 		<module>com.github.librecut.application</module>
                 <module>com.github.librecut.svg</module>
 <!--		<module>com.github.librecut.mediascanner</module>
-		<module>com.github.librecut.common.opencv</module>
-		<module>com.github.librecut.common.opencv.linux.x86</module>
-		<module>com.github.librecut.common.opencv.linux.x86_64</module>
 		<module>com.github.librecut.product.feature</module>
 		<module>com.github.librecut.product.feature/product</module>
 		<module>com.github.librecut.mediascanner.app</module> -->
