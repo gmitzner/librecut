@@ -10,7 +10,7 @@
 	</parent>
 
 	<groupId>com.github.librecut</groupId>
-	<artifactId>com.github.librecut.common.usb.x86_64</artifactId>
+	<artifactId>com.github.librecut.common.usb.linux.x86_64</artifactId>
 	<version>1.0.0-SNAPSHOT</version>
 	<packaging>eclipse-plugin</packaging>
 

@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: LibreCut Common USB Base Library x86 Binaries
-Bundle-SymbolicName: com.github.librecut.common.usb.x86;singleton:=true
+Bundle-Name: LibreCut Common USB Base Library x86 Binaries For Linux
+Bundle-SymbolicName: com.github.librecut.common.usb.linux.x86;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Gerhard Mitzner
 Fragment-Host: com.github.librecut.common.usb;bundle-version="[1.0.0,2.0.0)"
