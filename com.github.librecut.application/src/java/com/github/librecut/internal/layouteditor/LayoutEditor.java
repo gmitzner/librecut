@@ -27,6 +27,8 @@ import java.util.List;
 import java.util.function.Consumer;
 
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.FocusEvent;
 import org.eclipse.swt.events.FocusListener;
@@ -51,12 +53,15 @@ import com.github.librecut.api.cutter.model.LoadingDirection;
 import com.github.librecut.api.design.model.IDesign;
 import com.github.librecut.api.design.model.IPoint;
 import com.github.librecut.api.design.spi.IDesignConsumer;
+import com.github.librecut.api.gui.spi.IMediaRenderer;
 import com.github.librecut.api.media.model.IMedia;
 import com.github.librecut.api.media.model.IMediaSize;
 import com.github.librecut.common.cutter.model.Borders;
 import com.github.librecut.common.cutter.model.MediaSize;
 import com.github.librecut.common.design.model.Point;
+import com.github.librecut.internal.application.Activator;
 import com.github.librecut.internal.cutter.CutterCore;
+import com.github.librecut.internal.media.MediaRendererFactory;
 import com.github.librecut.internal.resource.model.DesignEntity;
 import com.github.librecut.internal.resource.model.IDesignEntity;
 import com.github.librecut.internal.resource.model.ILayout;
@@ -65,6 +70,7 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 
 	public static final String ID = "com.github.librecut.layouteditor";
 
+	private MediaRendererFactory mediaRendererFactory;
 	private LayoutCanvas layoutCanvas;
 
 	private String unitName;
@@ -82,6 +88,7 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 	volatile boolean mirrorDesigns;
 
 	private LayoutModel layout;
+	private IMediaRenderer mediaRenderer;
 
 	private int nextEntityId;
 
@@ -97,9 +104,12 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 		setInput(input);
 		setPartName(input.getName());
 
+		mediaRendererFactory = new MediaRendererFactory();
+
 		initializeUnit();
 
 		layout = new LayoutModel(adaptedInput);
+		mediaRenderer = createMediaRenderer(layout.getMedia());
 
 		IMedia mediaFormat = layout.getMedia();
 		IMediaSize mediaSize = mediaFormat.getMediaSize();
@@ -120,6 +130,17 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 		precision = 1;
 	}
 
+	private IMediaRenderer createMediaRenderer(IMedia media) throws PartInitException {
+
+		IMediaRenderer mediaRenderer = mediaRendererFactory.create(media);
+		if (mediaRenderer == null) {
+			IStatus status = new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+					"No suitable media renderer implementation found.");
+			throw new PartInitException(status);
+		}
+		return mediaRenderer;
+	}
+
 	@Override
 	public void createPartControl(Composite parent) {
 
@@ -131,7 +152,7 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 		controlsComposite.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, true, 1, 1));
 		controlsComposite.setLayout(new GridLayout(2, false));
 
-		layoutCanvas = new LayoutCanvas(baseComposite, SWT.NONE, this, () -> layout);
+		layoutCanvas = new LayoutCanvas(baseComposite, SWT.NONE, this, () -> layout, mediaRenderer);
 		layoutCanvas.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 1));
 
 		createControls(controlsComposite, layoutCanvas);
@@ -144,6 +165,8 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 
 	private void createControls(Composite parent, final LayoutCanvas layoutCanvas) {
 
+		boolean enableMediaControls = mediaRendererFactory.isDefaultRenderer(mediaRenderer);
+
 		Label label = new Label(parent, SWT.LEFT);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.CENTER, false, false, 2, 1));
 		label.setText("Media size");
@@ -152,20 +175,21 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 		mediaSizeCombo.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
 		mediaSizeCombo.add("Custom");
 		mediaSizeCombo.select(0);
+		mediaSizeCombo.setEnabled(enableMediaControls);
 
 		createInputValue(parent, "Width:", mediaWidthInches, value -> {
 			mediaWidthInches = value;
 			IMedia media = createMedia();
 			layout.setMedia(media);
 			layoutCanvas.redraw();
-		});
+		}, enableMediaControls);
 
 		createInputValue(parent, "Height:", mediaHeightInches, value -> {
 			mediaHeightInches = value;
 			IMedia media = createMedia();
 			layout.setMedia(media);
 			layoutCanvas.redraw();
-		});
+		}, enableMediaControls);
 
 		label = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
@@ -182,34 +206,35 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 			bordersCombo.add(descriptor.getName());
 		}
 		bordersCombo.select(0);
+		bordersCombo.setEnabled(enableMediaControls);
 
 		createInputValue(parent, "Top:", topBorderInches, value -> {
 			topBorderInches = value;
 			IMedia media = createMedia();
 			layout.setMedia(media);
 			layoutCanvas.redraw();
-		});
+		}, enableMediaControls);
 
 		createInputValue(parent, "Left:", leftBorderInches, value -> {
 			leftBorderInches = value;
 			IMedia media = createMedia();
 			layout.setMedia(media);
 			layoutCanvas.redraw();
-		});
+		}, enableMediaControls);
 
 		createInputValue(parent, "Right:", rightBorderInches, value -> {
 			rightBorderInches = value;
 			IMedia media = createMedia();
 			layout.setMedia(media);
 			layoutCanvas.redraw();
-		});
+		}, enableMediaControls);
 
 		createInputValue(parent, "Bottom:", bottomBorderInches, value -> {
 			bottomBorderInches = value;
 			IMedia media = createMedia();
 			layout.setMedia(media);
 			layoutCanvas.redraw();
-		});
+		}, enableMediaControls);
 
 		label = new Label(parent, SWT.SEPARATOR | SWT.HORIZONTAL);
 		label.setLayoutData(new GridData(SWT.FILL, SWT.CENTER, false, false, 2, 1));
@@ -253,7 +278,7 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 	}
 
 	private void createInputValue(Composite parent, String labelText, BigDecimal initialValue,
-			final Consumer<BigDecimal> consumer) {
+			final Consumer<BigDecimal> consumer, boolean enabled) {
 
 		Label label = new Label(parent, SWT.LEFT);
 		label.setLayoutData(new GridData(SWT.RIGHT, SWT.CENTER, false, false, 1, 1));
@@ -306,6 +331,7 @@ public class LayoutEditor extends EditorPart implements IDesignEntityChangeListe
 		});
 
 		text.setText(asValueWithUnit(initialValue));
+		text.setEnabled(enabled);
 	}
 
 	@Override

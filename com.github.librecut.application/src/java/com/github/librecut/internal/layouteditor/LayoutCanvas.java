@@ -30,6 +30,7 @@ import org.eclipse.swt.widgets.Canvas;
 import org.eclipse.swt.widgets.Composite;
 
 import com.github.librecut.api.cutter.model.LoadingDirection;
+import com.github.librecut.api.gui.spi.IMediaRenderer;
 import com.github.librecut.api.media.model.IMedia;
 import com.github.librecut.internal.resource.model.IDesignEntity;
 
@@ -50,7 +51,7 @@ public class LayoutCanvas extends Canvas {
 	private volatile RenderingParameters renderingParameters;
 
 	public LayoutCanvas(Composite parent, int style, final IDesignEntityChangeListener designEntityChangeListener,
-			final Supplier<LayoutModel> layoutSupplier) {
+			final Supplier<LayoutModel> layoutSupplier, IMediaRenderer mediaRenderer) {
 
 		super(parent, style | SWT.BORDER);
 
@@ -59,9 +60,8 @@ public class LayoutCanvas extends Canvas {
 		this.selectedEntity = null;
 		this.selectedEntityId = null;
 
-		// TODO add support for non-default media renderers
 		this.addPaintListener(new LayoutCanvasPaintListener(layoutSupplier, () -> selectedEntityId,
-				() -> renderingParameters, new DefaultMediaRenderer()));
+				() -> renderingParameters, mediaRenderer));
 
 		this.addMouseListener(new LayoutCanvasMouseListener(this, layoutSupplier, () -> renderingParameters));
 
