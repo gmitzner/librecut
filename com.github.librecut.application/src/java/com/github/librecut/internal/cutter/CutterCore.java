@@ -43,7 +43,7 @@ public final class CutterCore implements ICutterStatusListener {
 
 	private CutterCore() {
 
-		this.cuttersRef = new AtomicReference<>();
+		this.cuttersRef = new AtomicReference<>(Collections.emptyList());
 		this.providerList = new ArrayList<>();
 	}
 
