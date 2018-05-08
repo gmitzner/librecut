@@ -34,7 +34,7 @@ import com.github.librecut.common.cutter.model.DefaultMediaSize;
 import com.github.librecut.internal.application.Activator;
 import com.github.librecut.internal.layouteditor.LayoutEditor;
 import com.github.librecut.internal.layouteditor.LayoutEditorInput;
-import com.github.librecut.internal.resource.model.Layout;
+import com.github.librecut.resource.model.Layout;
 
 public class NewLayoutHandler extends AbstractHandler {
 

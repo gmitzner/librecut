@@ -30,7 +30,7 @@ import org.eclipse.swt.graphics.Rectangle;
 
 import com.github.librecut.api.design.model.IPoint;
 import com.github.librecut.common.design.model.Point;
-import com.github.librecut.internal.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.IDesignEntity;
 
 public class LayoutCanvasMouseListener implements MouseListener, MouseMoveListener {
 

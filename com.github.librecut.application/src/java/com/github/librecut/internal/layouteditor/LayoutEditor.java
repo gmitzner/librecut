@@ -62,9 +62,9 @@ import com.github.librecut.common.design.model.Point;
 import com.github.librecut.internal.application.Activator;
 import com.github.librecut.internal.cutter.CutterCore;
 import com.github.librecut.internal.media.MediaRendererFactory;
-import com.github.librecut.internal.resource.model.DesignEntity;
-import com.github.librecut.internal.resource.model.IDesignEntity;
-import com.github.librecut.internal.resource.model.ILayout;
+import com.github.librecut.resource.model.DesignEntity;
+import com.github.librecut.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.ILayout;
 
 public class LayoutEditor extends EditorPart implements IDesignEntityChangeListener, IDesignConsumer {
 

@@ -47,8 +47,8 @@ import com.github.librecut.api.media.model.IMedia;
 import com.github.librecut.api.media.model.IMediaSize;
 import com.github.librecut.common.design.model.Point;
 import com.github.librecut.internal.application.Activator;
-import com.github.librecut.internal.resource.model.IDesignEntity;
-import com.github.librecut.internal.resource.model.ILayout;
+import com.github.librecut.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.ILayout;
 
 public class CutWizard extends Wizard {
 

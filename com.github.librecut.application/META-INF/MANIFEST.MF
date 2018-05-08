@@ -19,3 +19,4 @@ Import-Package: com.github.librecut.api.cutter.model;version="[1.0.0,2.0.0)",
  com.github.librecut.api.media.model;version="[1.0.0,2.0.0)",
  com.github.librecut.common.cutter.model;version="[1.0.0,2.0.0)",
  com.github.librecut.common.design.model;version="[1.0.0,2.0.0)"
+Export-Package: com.github.librecut.resource.model;version="1.0.0"

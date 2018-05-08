@@ -30,8 +30,8 @@ import com.github.librecut.api.design.model.IDesign;
 import com.github.librecut.api.design.model.IPattern;
 import com.github.librecut.api.design.model.IPoint;
 import com.github.librecut.api.media.model.IMedia;
-import com.github.librecut.internal.resource.model.IDesignEntity;
-import com.github.librecut.internal.resource.model.ILayout;
+import com.github.librecut.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.ILayout;
 
 public class LayoutModel implements ILayout {
 

@@ -19,7 +19,7 @@
 package com.github.librecut.internal.layouteditor;
 
 import com.github.librecut.api.design.model.IPoint;
-import com.github.librecut.internal.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.IDesignEntity;
 
 public interface IDesignEntityChangeListener {
 

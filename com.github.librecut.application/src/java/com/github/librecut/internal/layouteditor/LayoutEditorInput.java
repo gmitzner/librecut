@@ -22,7 +22,7 @@ import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IPersistableElement;
 
-import com.github.librecut.internal.resource.model.ILayout;
+import com.github.librecut.resource.model.ILayout;
 
 public class LayoutEditorInput implements IEditorInput {
 

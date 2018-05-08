@@ -32,7 +32,7 @@ import org.eclipse.swt.widgets.Composite;
 import com.github.librecut.api.cutter.model.LoadingDirection;
 import com.github.librecut.api.gui.spi.IMediaRenderer;
 import com.github.librecut.api.media.model.IMedia;
-import com.github.librecut.internal.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.IDesignEntity;
 
 public class LayoutCanvas extends Canvas {
 

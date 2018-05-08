@@ -36,7 +36,7 @@ import org.eclipse.swt.widgets.Display;
 
 import com.github.librecut.api.gui.spi.IMediaRenderer;
 import com.github.librecut.api.media.model.IMedia;
-import com.github.librecut.internal.resource.model.IDesignEntity;
+import com.github.librecut.resource.model.IDesignEntity;
 
 public class LayoutCanvasPaintListener implements PaintListener {
 
