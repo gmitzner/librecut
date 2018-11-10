@@ -1,0 +1,29 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: LibreCut Mediascanner Extension
+Bundle-SymbolicName: com.github.librecut.mediascanner;singleton:=true
+Bundle-Version: 1.0.0.qualifier
+Bundle-Activator: com.github.librecut.internal.mediascanner.Activator
+Bundle-Vendor: Gerhard Mitzner
+Require-Bundle: org.eclipse.core.runtime;bundle-version="[3.10.0,4.0.0)",
+ javax.servlet;bundle-version="[3.1.0,4.0.0)",
+ org.eclipse.jetty.server;bundle-version="[9.2.13,10.0.0)",
+ org.eclipse.jetty.servlet;bundle-version="[9.2.13,10.0.0)",
+ org.eclipse.jetty.util;bundle-version="[9.2.13,10.0.0)",
+ org.eclipse.jetty.http;bundle-version="[9.2.13,10.0.0)",
+ org.eclipse.ui;bundle-version="[3.106.0,4.0.0)",
+ org.eclipse.ui.workbench;bundle-version="[3.107.0,4.0.0)",
+ org.eclipse.swt;bundle-version="[3.104.1,4.0.0)",
+ org.eclipse.equinox.preferences;bundle-version="[3.6.0,4.0.0)"
+Bundle-RequiredExecutionEnvironment: JavaSE-1.8
+Bundle-ActivationPolicy: lazy
+Import-Package: com.github.librecut.api.cutter.model;version="[1.0.0,2.0.0)",
+ com.github.librecut.api.cutter.spi;version="[1.0.0,2.0.0)",
+ com.github.librecut.api.design.model;version="[1.0.0,2.0.0)",
+ com.github.librecut.api.gui;version="[1.0.0,2.0.0)",
+ com.github.librecut.api.gui.spi;version="[1.0.0,2.0.0)",
+ com.github.librecut.api.media.model;version="[1.0.0,2.0.0)",
+ com.github.librecut.common.cutter.model;version="[1.0.0,2.0.0)",
+ com.github.librecut.resource.model;version="[1.0.0,2.0.0)",
+ org.opencv.core;version="[3.0.0,4.0.0)",
+ org.opencv.imgproc;version="[3.0.0,4.0.0)"

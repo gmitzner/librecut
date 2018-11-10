@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension
+         point="com.github.librecut.api.gui.mediaRenderers">
+      <renderer
+            class="com.github.librecut.internal.mediascanner.media.ImageBasedMediaRenderer"
+            id="com.github.librecut.mediascanner.imagebasedmediarenderer"
+            name="Image-based media renderer"
+            vendor="Gerhard Mitzner">
+      </renderer>
+   </extension>
+
+</plugin>

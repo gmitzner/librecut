@@ -50,8 +50,8 @@ public class Layout implements ILayout {
 	}
 
 	@Override
-	public void setMedia(IMedia format) {
-		this.media = format;
+	public void setMedia(IMedia media) {
+		this.media = media;
 	}
 
 	@Override
